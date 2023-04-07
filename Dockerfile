@@ -12,7 +12,7 @@ ENV PYTHONUNBUFFERED 1
 # install dependencies
 RUN pip install --upgrade pip
 COPY ./requirements.txt /usr/src/app
-RUN pip install psycopg2-binary==2.5.6
+RUN pip install psycopg2-binary
 RUN pip install -r requirements.txt
 
 
