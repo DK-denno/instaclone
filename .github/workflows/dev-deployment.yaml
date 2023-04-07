@@ -1,0 +1,28 @@
+name: Deploy to Dev.
+
+on:
+  push:
+    branches: [dev]
+
+# Your workflows jobs.
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      GH_VERSION: dev-${{github.sha}}
+      GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build docker image
+        run: |
+          docker build Dockerfile -t django/instadk .
+      - name: Login to Server container
+        run: |
+          docker login registry.dk-denno.com  -u dkd3nno -p Dennisveer27@#
+      - name: Tag docker image
+        run: |
+          docker tag django/instadk registry.dk-denno.com/instadk:dev
+      - name: Push to registry
+        run: |
+          docker push registry.dk-denno.com/instadk:dev
