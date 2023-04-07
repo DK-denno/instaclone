@@ -32,7 +32,7 @@ if config('MODE')=="dev":
            'ENGINE': 'django.db.backends.postgresql_psycopg2',
            'NAME': config('DB_NAME'),
            'USER': config('DB_USER'),
-           'PASSWORD': config('DB_PASSWORD', default="postgres://dk-denno:12345Fly@3@localhost/insta")
+           'PASSWORD': config('DB_PASSWORD')
        }
 
    }
@@ -40,7 +40,7 @@ if config('MODE')=="dev":
 else:
    DATABASES = {
        'default': dj_database_url.config(
-           default=config('DATABASE_URL')
+           default="postgres://dk-denno:12345Fly@3@localhost/insta"
        )
    }
 
