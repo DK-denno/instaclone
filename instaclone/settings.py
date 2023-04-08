@@ -13,57 +13,55 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 import django_heroku
 import dj_database_url
-from decouple import Csv
+from decouple import config,Csv
 
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'dennisveer27@gmail.com'
-EMAIL_HOST_PASSWORD = 'nxezemlddfklhidy'
+EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 
-MODE=os.environ.get("MODE", default="dev")
-SECRET_KEY = os.environ.get('SECRET_KEY')
-DEBUG = os.environ.get('DEBUG', default=True, cast=bool)
+MODE=config("MODE", default="dev")
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
 # development
-# if os.environ.get('MODE')=="dev":
-#    DATABASES = {
-#        'default': {
-#            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#            'NAME': os.environ.get('DB_NAME'),
-#            'USER': os.environ.get('DB_USER'),
-#            'PASSWORD': os.environ.get('DB_PASSWORD'),
-#            'HOST': 'localhost',
-#            'PORT': 5432,
-#        }
+if config('MODE')=="dev":
+   DATABASES = {
+       'default': {
+           'ENGINE': 'django.db.backends.postgresql_psycopg2',
+           'NAME': config('DB_NAME'),
+           'USER': config('DB_USER'),
+           'PASSWORD': config('DB_PASSWORD'),
+           'HOST': 'localhost',
+           'PORT': 5432,
+       }
 
-#    }
-# # production
-# else:
-#    DATABASES = {
-#        'default': dj_database_url.os.environ.get(
-#            default="postgres://dk-denno:12345Fly@3@localhost/insta"
-#        )
-#    }
+   }
+# production
+else:
+   DATABASES = {
+       'default': dj_database_url.config(
+           default="postgres://dk-denno:12345Fly@3@localhost/insta"
+       )
+   }
 
-# db_from_env = dj_database_url.os.environ.get(conn_max_age=500)
-# DATABASES['default'].update(db_from_env)
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'insta',
-        'USER': 'pk',
-        'PASSWORD':'12345Fly@#',
-        'HOST': 'localhost',
-        'PORT': 5432,
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'instagram',
+#         'USER': 'zamzam',
+#     'PASSWORD':'Ilovememore100',
+#     }
+# }
 
 
 
@@ -86,7 +84,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'tinymce',
-    'insta.apps.Instaos.environ.get',
+    'insta.apps.InstaConfig',
     'bootstrap4',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -178,9 +176,9 @@ STATICFILES_DIRS = (
 )
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# os.environ.geturing the location for media
+# configuring the location for media
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# os.environ.geture Django App for Heroku.
+# Configure Django App for Heroku.
 django_heroku.settings(locals())
