@@ -15,53 +15,55 @@ import django_heroku
 import dj_database_url
 from decouple import Csv
 
-EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
-EMAIL_HOST = os.environ.get('EMAIL_HOST')
-EMAIL_PORT = os.environ.get('EMAIL_PORT')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'dennisveer27@gmail.com'
+EMAIL_HOST_PASSWORD = 'nxezemlddfklhidy'
 
 
 MODE=os.environ.get("MODE", default="dev")
 SECRET_KEY = os.environ.get('SECRET_KEY')
-DEBUG = os.environ.get('DEBUG', default=False, cast=bool)
+DEBUG = os.environ.get('DEBUG', default=True, cast=bool)
 # development
-if os.environ.get('MODE')=="dev":
-   DATABASES = {
-       'default': {
-           'ENGINE': 'django.db.backends.postgresql_psycopg2',
-           'NAME': os.environ.get('DB_NAME'),
-           'USER': os.environ.get('DB_USER'),
-           'PASSWORD': os.environ.get('DB_PASSWORD'),
-           'HOST': 'localhost',
-           'PORT': 5432,
-       }
+# if os.environ.get('MODE')=="dev":
+#    DATABASES = {
+#        'default': {
+#            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#            'NAME': os.environ.get('DB_NAME'),
+#            'USER': os.environ.get('DB_USER'),
+#            'PASSWORD': os.environ.get('DB_PASSWORD'),
+#            'HOST': 'localhost',
+#            'PORT': 5432,
+#        }
 
-   }
-# production
-else:
-   DATABASES = {
-       'default': dj_database_url.os.environ.get(
-           default="postgres://dk-denno:12345Fly@3@localhost/insta"
-       )
-   }
+#    }
+# # production
+# else:
+#    DATABASES = {
+#        'default': dj_database_url.os.environ.get(
+#            default="postgres://dk-denno:12345Fly@3@localhost/insta"
+#        )
+#    }
 
-db_from_env = dj_database_url.os.environ.get(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+# db_from_env = dj_database_url.os.environ.get(conn_max_age=500)
+# DATABASES['default'].update(db_from_env)
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', cast=Csv())
+ALLOWED_HOSTS = ['*']
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'instagram',
-#         'USER': 'zamzam',
-#     'PASSWORD':'Ilovememore100',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'insta',
+        'USER': 'pk',
+        'PASSWORD':'12345Fly@#',
+        'HOST': 'localhost',
+        'PORT': 5432,
+    }
+}
 
 
 
