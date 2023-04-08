@@ -32,7 +32,7 @@ if config('MODE')=="dev":
            'ENGINE': 'django.db.backends.postgresql_psycopg2',
            'NAME': config('DB_NAME'),
            'USER': config('DB_USER'),
-           'PASSWORD': '',
+           'PASSWORD': config('DB_PASSWORD'),,
            'HOST': 'localhost',
            'PORT': 5432,
        }
