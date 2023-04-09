@@ -41,15 +41,15 @@ if os.environ.get('MODE')=="dev":
 # production
 else:
    DATABASES = {
-       'default': dj_database_url.os.environ.get(
+       'default': dj_database_url.config(
            default="postgres://dk-denno:Dennisveer27@#@localhost/insta"
        )
    }
 
-db_from_env = dj_database_url.os.environ.get(conn_max_age=500)
+db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', cast=Csv())
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS')
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
@@ -77,7 +77,7 @@ SECRET_KEY = '@hfrkgzt)1j2csc4zf*e-1+!ko$__418rn33i#-#8n@4m3im$^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
