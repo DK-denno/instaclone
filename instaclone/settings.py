@@ -41,18 +41,13 @@ if config('MODE')=="dev":
 # production
 else:
    DATABASES = {
-       'default': {
-           'ENGINE': 'django.db.backends.postgresql_psycopg2',
-           'NAME': "insta",
-           'USER': config('DB_USER'),
-           'PASSWORD': config('DB_PASSWORD'),
-           'HOST': '127.0.0.1',
-           'PORT': 5432,
-       }
+       'default': dj_database_url.config(
+           default="postgres://dk-denno:Dennisveer27@#@localhost/insta"
+       )
    }
 
-# db_from_env = dj_database_url.config(conn_max_age=500)
-# DATABASES['default'].update(db_from_env)
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
