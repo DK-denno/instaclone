@@ -26,25 +26,25 @@ MODE=os.environ.get("MODE", default="dev")
 SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG')
 # development
-if os.environ.get('MODE')=="dev":
-   DATABASES = {
-       'default': {
-           'ENGINE': 'django.db.backends.postgresql_psycopg2',
-           'NAME': "insta",
-           'USER': os.environ.get('DB_USER'),
-           'PASSWORD': os.environ.get('DB_PASSWORD'),
-           'HOST': '127.0.0.1',
-           'PORT': 5432,
-       }
+# if os.environ.get('MODE')=="dev":
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': "insta",
+        'USER': "dk-denno",
+        'PASSWORD': "Dennisveer27@#",
+        'HOST': '127.0.0.1',
+        'PORT': 5432,
+    }
 
-   }
+}
 # production
-else:
-   DATABASES = {
-       'default': dj_database_url.config(
-           default="postgres://dk-denno:Dennisveer27@#@localhost/insta"
-       )
-   }
+# else:
+#    DATABASES = {
+#        'default': dj_database_url.config(
+#            default="postgres://dk-denno:Dennisveer27@#@localhost/insta"
+#        )
+#    }
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
