@@ -22,4 +22,6 @@ COPY . /usr/src/app
 
 EXPOSE 8444
 
+CMD ["python", "manage.py", "makemigrations"]
+CMD ["python", "manage.py", "migrate"]
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8444"]
