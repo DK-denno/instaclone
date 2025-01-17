@@ -31,11 +31,11 @@
                     </div>
                     <div class="card-footer">
                             <div>
-                                {%if request_user == AnonymousUser%}
+                                {% if request_user == AnonymousUser %}
                                 
                                         <a href="/accounts/login" class = "btn btn-sm btn-primary btn-inline"> Continue as {{request.user}}? </a>
                                     
-                                {% endif%}
+                                {% endif %}
                                     <p class="log" style="display:block">Not {{request.user}}? <a href="/signup">Create Account</a></p>
                             </div>
                     </div>

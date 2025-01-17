@@ -1,19 +1,19 @@
-from django.conf.urls import url
+from django.urls import re_path
 from . import views
 
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns=[
-    url(r'^$', views.home, name='sign'),
-    url(r'^home/$',views.index,name='index'),
-    url(r'^new/image$', views.new_image, name='new-image'),
-    url(r'^profile/$',views.profile,name='profile'),
-    url(r'^search/', views.search_results, name='search_results'),
-    url(r'^comment/(?P<image_id>\d+)', views.comment, name='comment'),
-    url(r'^profiles/(\d+)',views.profiles,name='profiles'),
-    url(r'^signup/$', views.signup, name='signup'),
-    url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+    re_path(r'^$', views.home, name='sign'),
+    re_path(r'^home/$',views.index,name='index'),
+    re_path(r'^new/image$', views.new_image, name='new-image'),
+    re_path(r'^profile/$',views.profile,name='profile'),
+    re_path(r'^search/', views.search_results, name='search_results'),
+    re_path(r'^comment/(?P<image_id>\d+)', views.comment, name='comment'),
+    re_path(r'^profiles/(\d+)',views.profiles,name='profiles'),
+    re_path(r'^signup/$', views.signup, name='signup'),
+    re_path(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         views.activate, name='activate'),
 ]
 if settings.DEBUG:
