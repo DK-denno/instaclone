@@ -24,7 +24,7 @@ MODE=os.environ.get("MODE", default="dev")
 SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG')
 # development
-if config('MODE')=="dev":
+if os.environ.get('MODE')=="dev":
    DATABASES = {
        'default': {
            'ENGINE': 'django.db.backends.postgresql_psycopg2',
