@@ -28,6 +28,7 @@ def signup(request):
             user.save()
             current_site = get_current_site(request)
             mail_subject = 'Activate your Instagram account.'
+            sender = 'dennisveer27@gmail.com'
             message = render_to_string('acc_active_email.html', {
                 'user': user,
                 'domain': current_site.domain,
@@ -35,11 +36,16 @@ def signup(request):
                 'token':account_activation_token.make_token(user),
             })
             to_email = form.cleaned_data.get('email')
+            cc = []
+            bcc = []
+
+            html_content = render_to_string(
+                "email/instamail.html", {"name": user.username})
             email = EmailMessage(
-                mail_subject, message, to=[to_email]
-            )
+                mail_subject, html_content, sender, [to_email], cc, bcc)
             email.send()
-            return HttpResponse('Please confirm your email address to complete the registration')
+            return redirect('home')
+            # return HttpResponse('Please confirm your email address to complete the registration')
     else:
         form = SignupForm()
     return render(request, 'signup.html', {'form': form})
@@ -55,8 +61,8 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.save()
         login(request, user)
-        # return redirect('home')
-        return HttpResponse('Thank you for your email confirmation. Now you can <a href="/accounts/login/">Login</a>  your account.')
+        return redirect('home')
+        # return HttpResponse('Thank you for your email confirmation. Now you can <a href="/accounts/login/">Login</a>  your account.')
     else:
         return HttpResponse('Activation link is invalid!')
 
