@@ -24,7 +24,7 @@ jobs:
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - name: Tag docker image
         run: |
-          docker tag vertx/laxnit-backend-auth:latest  3c0ww3rc3/instadk:latest
+          docker tag django/instadk:latest  3c0ww3rc3/instadk:latest
       - name: Push to registry
         run: |
           docker push 3c0ww3rc3/instadk:latest
