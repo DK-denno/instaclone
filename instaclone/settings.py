@@ -37,7 +37,7 @@ if os.environ.get('MODE')=="dev":
        
    }
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS')
+ALLOWED_HOSTS = "instadk-latest.onrender.com"
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
